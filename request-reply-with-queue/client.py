@@ -17,9 +17,11 @@ def main():
             sock.send("Handling message from client %s" % client_id)
             event = sock.recv()
             print event
-    except KeyboardInterrupt:
+    except:
         pass
-    print "Done."
+    finally:
+        sock.close()
+        ctx.term()
 
 if __name__ == "__main__":
     main()

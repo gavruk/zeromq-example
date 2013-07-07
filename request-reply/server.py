@@ -14,9 +14,6 @@ def main():
     sock = ctx.socket(zmq.REP)
     sock.bind(host)
 
-    print "Hit Ctrl-C to stop broadcasting."
-    time.sleep(1.0)
-
     try:
         for n in itertools.count():
             recieved_message = sock.recv()
@@ -28,12 +25,11 @@ def main():
             sock.send(js)
 
             time.sleep(2)
-    except KeyboardInterrupt:
+    except:
         pass
-
-    print "Waiting for message queues to flush..."
-    time.sleep(0.5)
-    print "Done."
+    finally:
+        sock.close()
+        ctx.term()
 
 if __name__ == "__main__":
     main()

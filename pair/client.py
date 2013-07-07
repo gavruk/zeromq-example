@@ -1,22 +1,23 @@
 #!/usr/bin/env python
 
-import sys
 import time
 
 import zmq
 
 def main():
-    host = "tcp://127.0.0.1:5555"
+    host = "tcp://127.0.0.1:5554"
 
     ctx = zmq.Context()
-    sock = ctx.socket(zmq.SUB)
-    sock.setsockopt(zmq.SUBSCRIBE, '')
+    sock = ctx.socket(zmq.PAIR)
     sock.connect(host)
-    
+
     try:
+        sock.send("hello")
         while True:
-            event = sock.recv()
-            print event
+            msg = sock.recv()
+            print msg
+            sock.send("Hello from client")
+            time.sleep(1)
     except:
         pass
     finally:

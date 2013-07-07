@@ -17,10 +17,9 @@ def main():
         backend.bind(backend_host)
 
         zmq.device(zmq.FORWARDER, frontend, backend)
-    except KeyboardInterrupt, Exception:
-        print "bringing down zmq device"
-    finally:
+    except:
         pass
+    finally:
         frontend.close()
         backend.close()
         ctx.term()

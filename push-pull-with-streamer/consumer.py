@@ -1,21 +1,24 @@
 #!/usr/bin/env python
 
-import time
-
 import zmq
+import random
 
 def main():
     host = "tcp://127.0.0.1:5555"
 
     ctx = zmq.Context()
-    sock = ctx.socket(zmq.SUB)
-    sock.setsockopt(zmq.SUBSCRIBE, '')
+    sock = ctx.socket(zmq.PULL)
     sock.connect(host)
     
+    consumer_id = "client #%s" % random.randint(0, 100)
+    print consumer_id
+
     try:
         while True:
-            event = sock.recv_json()
-            print event
+            data = sock.recv_json()
+            num = data['num']
+            result = { 'consumer' : consumer_id, 'num' : num}
+            print result
     except:
         pass
     finally:

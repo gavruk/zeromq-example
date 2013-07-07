@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 
-import time
+import uuid
 
 import zmq
 
+
 def main():
-    host = "tcp://127.0.0.1:5555"
+    host = "tcp://127.0.0.1:5554"
 
     ctx = zmq.Context()
-    sock = ctx.socket(zmq.SUB)
-    sock.setsockopt(zmq.SUBSCRIBE, '')
+    sock = ctx.socket(zmq.PUSH)
     sock.connect(host)
-    
+
     try:
-        while True:
-            event = sock.recv_json()
-            print event
+        for num in xrange(100):
+            message = { 'id': str(uuid.uuid1()), 'num': num }
+            sock.send_json(message)
     except:
         pass
     finally:

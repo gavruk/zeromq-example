@@ -19,7 +19,7 @@ def main():
             print event
             sock.send_json(event)
 
-            time.sleep(2)
+            time.sleep(1)
     except:
         pass
     finally:

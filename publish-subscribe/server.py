@@ -2,7 +2,6 @@
 
 import itertools
 import time
-import json
 import uuid
 
 import zmq
@@ -17,9 +16,8 @@ def main():
     try:
         for n in itertools.count():            
             event = {"id": str(uuid.uuid1()), "count": n}
-            js = json.dumps(event)
-            print js
-            sock.send(js)
+            print event
+            sock.send_json(event)
 
             time.sleep(2)
     except:

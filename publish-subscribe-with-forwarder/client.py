@@ -15,7 +15,7 @@ def main():
     
     try:
         while True:
-            event = sock.recv()
+            event = sock.recv_json()
             print event
     except:
         pass

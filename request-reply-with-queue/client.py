@@ -15,7 +15,7 @@ def main():
     try:
         while True:            
             sock.send("Handling message from client %s" % client_id)
-            event = sock.recv()
+            event = sock.recv_json()
             print event
     except:
         pass

@@ -9,7 +9,6 @@ python server.py
 You can run many servers and add them dynamically. 
 
 <pre><code>python client.py
-python client.py
 python server.py
 …
 python server.py

@@ -1,6 +1,6 @@
 Pub-Sub
 ========
-Publisher sends messages to the subscribers.
+1 publisher sends messages to N subscribers.
 ###Usage:
 <pre><code>python client.py
 python server.py
